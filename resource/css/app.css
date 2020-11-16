@@ -1,0 +1,52 @@
+.title-bar{
+    -fx-background-color:#5D6D7E;
+}
+
+.btn{
+    -fx-fill:#FFFFFF;
+}
+
+
+.btn:hover{
+    -fx-cursor:hand;
+}
+
+#btnClose{
+    -fx-fill:#E74C3C;
+}
+
+.footer{
+    -fx-border-color:#5D6D7E;
+    -fx-border-width:1 0 0 0;
+}
+
+
+.textbox{
+    -fx-border-color:#5D6D7E;
+    -fx-border-width:0 0 1 0;
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius:0;
+    -fx-background-insets:none;
+}
+
+.textbox:focus{
+    -fx-border-style:none;
+    -fx-border-width:0 0 1 0;
+}
+
+#btnSearch:hover{
+    -fx-cursor:hand;
+}
+
+.background-base{
+    -fx-background-image:url("../img/background.jpg");
+    -fx-background-size:cover;
+}
+
+#viewSearchPane {
+    -fx-border-width:0 0 2 0;
+}
+
+.background{
+    -fx-background-size:cover;
+}

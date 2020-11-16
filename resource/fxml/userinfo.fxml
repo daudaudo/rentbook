@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="background-base" stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.FXMLController.UserInfo">
+   <children>
+      <Text id="titleUserInfo" fx:id="title" fill="WHITE" layoutX="697.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Userinfo" textAlignment="CENTER" underline="true" wrappingWidth="188.44646139705884">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Button layoutX="56.0" layoutY="110.0" mnemonicParsing="false" onAction="#toAddress" prefHeight="40.0" prefWidth="200.0" text="Quản lý địa chỉ">
+         <styleClass>
+            <String fx:value="textbox" />
+            <String fx:value="btn" />
+         </styleClass>
+      </Button>
+      <Button layoutX="56.0" layoutY="174.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Thông tin thanh toán">
+         <styleClass>
+            <String fx:value="textbox" />
+            <String fx:value="btn" />
+         </styleClass>
+      </Button>
+      <Button layoutX="56.0" layoutY="242.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Sách thuê">
+         <styleClass>
+            <String fx:value="textbox" />
+            <String fx:value="btn" />
+         </styleClass>
+      </Button>
+      <Button layoutX="56.0" layoutY="311.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="200.0" text="Đăng xuất">
+         <styleClass>
+            <String fx:value="textbox" />
+            <String fx:value="btn" />
+         </styleClass>
+      </Button>
+   </children>
+</AnchorPane>

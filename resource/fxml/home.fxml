@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="background-base" stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.FXMLController.Home">
+   <children>
+      <TextField id="qSearch" fx:id="qSearch" focusTraversable="false" layoutX="200.0" layoutY="40.0" prefHeight="40.0" prefWidth="650.0" promptText="Tìm kiếm gì đó" style="-fx-border-radius: 0 0 0 0; -fx-border-style: null;" styleClass="textbox">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </TextField>
+      <FontAwesomeIcon id="btnSearch" fill="#566573" iconName="SEARCH" layoutX="814.0" layoutY="68.0" onMouseClicked="#search" size="2EM" />
+      <TableView id="table" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="50.0" layoutY="93.0" prefHeight="470.0" prefWidth="800.0" scaleShape="false" styleClass="textbox" />
+      <Text id="usernameText" fill="WHITE" layoutX="788.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Text>
+      <ChoiceBox id="qChoice" layoutX="50.0" layoutY="40.0" prefHeight="40.0" prefWidth="150.0" styleClass="textbox">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ChoiceBox>
+   </children>
+</AnchorPane>

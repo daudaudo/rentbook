@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="950.0" stylesheets="@../../resource/css/app.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="core.Form.LayoutController">
+   <children>
+      <HBox fx:id="titleBar" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="900.0" styleClass="title-bar">
+         <children>
+            <HBox alignment="CENTER_LEFT" onMouseDragged="#dragged" onMousePressed="#pressed" prefHeight="40.0" prefWidth="924.0" style="-fx-background-color: transparent;">
+               <children>
+                  <ImageView fitHeight="27.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../resource/img/logo.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <FontAwesomeIcon fx:id="minusBtn" iconName="MINUS" onMouseClicked="#minus" size="2em" styleClass="btn">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+            <FontAwesomeIcon id="btnClose" fx:id="closeBtn" iconName="CLOSE" onMouseClicked="#close" size="2EM" styleClass="btn">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+         </children>
+      </HBox>
+      <HBox prefHeight="600.0" prefWidth="900.0">
+         <children>
+            <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="600.0" prefWidth="50.0" style="-fx-background-color: #273746;">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" iconName="HOME" onMouseClicked="#homeClick" size="2.5EM" styleClass="btn">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIcon>
+                  <FontAwesomeIcon fill="WHITE" iconName="COMMENT" onMouseClicked="#chatClick" size="2.5EM" styleClass="btn">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIcon>
+                  <FontAwesomeIcon fill="WHITE" iconName="HEART" onMouseClicked="#heartClick" size="2.5EM" styleClass="btn">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIcon>
+                  <FontAwesomeIcon fill="WHITE" iconName="SHOPPING_CART" onMouseClicked="#cartClick" size="2.5EM" styleClass="btn">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIcon>
+                  <FontAwesomeIcon fill="WHITE" iconName="USER" onMouseClicked="#userClick" size="2.5EM" styleClass="btn">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIcon>
+               </children>
+            </VBox>
+            <AnchorPane id="mainContentContainer" prefHeight="600.0" prefWidth="900.0" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
