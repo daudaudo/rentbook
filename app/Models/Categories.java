@@ -6,7 +6,7 @@ public class Categories extends Models {
     
     {
         primaryKey = "id" ;
-        tableName = getClass().getSimpleName();
+        tableName = getClass().getSimpleName().toLowerCase();
     }
 
 }

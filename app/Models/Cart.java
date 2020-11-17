@@ -6,7 +6,7 @@ public class Cart extends Models {
     
     {
         primaryKey = null;
-        tableName = getClass().getSimpleName();
+        tableName = getClass().getSimpleName().toLowerCase();
     }
 
 }

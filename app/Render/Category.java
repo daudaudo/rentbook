@@ -109,7 +109,7 @@ public class Category implements Render {
                             HashMap<String,Object> newcart = new HashMap<>();
                             newcart.put("username", req.session().get("user"));
                             newcart.put("book_id", getTableView().getItems().get(getIndex()).id);
-                            ArrayList<HashMap<String, Object>> check =  DB.belong().prepare("SELECT * FROM rentbook.cart where username = ? and book_id = ?").binding(req.session().get("user"),getTableView().getItems().get(getIndex()).id).get();
+                            ArrayList<HashMap<String, Object>> check =  DB.belong().prepare("SELECT * FROM cart where username = ? and book_id = ?").binding(req.session().get("user"),getTableView().getItems().get(getIndex()).id).get();
                             
                             if(check.size()==0) new Cart().insert(newcart);
                             else FormManager.belong().showAlert("Bạn đã thêm vào giỏ hàng trước đó rồi");

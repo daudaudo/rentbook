@@ -5,6 +5,6 @@ import core.Models.Models;
 public class Address extends Models {
     {
         primaryKey = "id" ;
-        tableName = getClass().getSimpleName();
+        tableName = getClass().getSimpleName().toLowerCase();
     }
 }

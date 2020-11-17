@@ -9,21 +9,13 @@
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
             "mainClass": "Main",
-            "projectName": "RentBook_abf320f"
+            "projectName": "rentbook_6f359cf"
         },
         {
             "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "vmArgs": "--module-path C:/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-Main<ManagerStudent_32c5bc5b>",
-            "request": "launch",
-            "mainClass": "Main",
-            "projectName": "ManagerStudent_32c5bc5b",
             "vmArgs": "--module-path C:/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml"
         }
     ]
