@@ -5,9 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Alert;
 import core.Supports.Validator;
+import app.Models.Users;
+import core.Facades.FormManager;
 import core.Facades.Request;
 import core.Facades.Router;
 
@@ -30,15 +30,13 @@ public class Signin {
         String error = "";
         if(!Validator.isUsername(user.getText()) || !Validator.isPassword(pass.getText())) error += "username và password cần có số ký tự lớn hơn 6 \n";
 
-        if(!Validator.isEmail(email.getText())) error+="Email sai định dạng ";
+        if(!Validator.isEmail(email.getText())) error+="Email sai định dạng \n";
 
-        
+        if(new Users(user.getText()).get() != null) error+="Username đã tồn tại";
 
         if(!error.equals("")){
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Lỗi mất rồi");
-            alert.setContentText(error);
-            alert.show();
+            FormManager.belong().showAlert(error);
+            return;
         }
         Request.belong().input.put("user", user.getText());
         Request.belong().input.put("pass", pass.getText());

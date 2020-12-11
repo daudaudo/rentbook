@@ -7,13 +7,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="background-base" stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="background-base" stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.FXMLController.Cart">
    <children>
-      <TableView id="tableCart" focusTraversable="false" layoutX="50.0" layoutY="104.0" prefHeight="407.0" prefWidth="800.0" styleClass="textbox">
+      <TableView id="tableCart" fx:id="tableCart" focusTraversable="false" layoutX="50.0" layoutY="104.0" prefHeight="407.0" prefWidth="800.0" styleClass="textbox">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy></TableView>
-      <Text id="usernameText" fill="WHITE" layoutX="788.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
+      <Text id="usernameText" fx:id="userText" fill="WHITE" layoutX="788.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
@@ -29,7 +29,7 @@
             <String fx:value="btn" />
          </styleClass>
       </Button>
-      <Button id="deleteAllCart" layoutX="620.0" layoutY="524.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="230.0" text="Xoá cả giỏ hàng">
+      <Button id="deleteAllCart" layoutX="620.0" layoutY="524.0" mnemonicParsing="false" onMouseClicked="#deleteAllCart" prefHeight="40.0" prefWidth="230.0" text="Xoá cả giỏ hàng">
          <styleClass>
             <String fx:value="textbox" />
             <String fx:value="btn" />

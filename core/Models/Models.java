@@ -2,28 +2,56 @@ package core.Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import core.Database.DB;
+import core.Supports.SQL;
 
-public class Models {
+public class Models implements Cloneable {
     public static DB db;
 
     protected String primaryKey = "id";
-    protected String tableName = null;
+    protected String tableName = getClass().getSimpleName().toLowerCase();
+    
+    protected String id = null;
+    protected String[] where = null;
 
+    private ArrayList<HashMap<String,Object>> result = null;
+    private HashMap<String,Object> data = null;
+    
     private String columns = "";
     private String values = "";
-
-    public HashMap<String,Object> find(String id){
-        return db.excuteQuery("SELECT * from " + tableName + " where " + primaryKey + " = '" + id+"'").get().size()==0?null:db.excuteQuery("SELECT * from " + tableName + " where " + primaryKey + " = '" + id+"'").get().get(0);
+    private String set = "";
+    
+    public Models(String id,String... config){
+        this.id = id;
+        primaryKey = config.length >= 1 ? config[0] : primaryKey;
+        tableName = config.length > 1 ? config[1] : tableName;
+        find();
+    }
+    
+    public Models(String[] where,String... config){
+        this.where = where;
+        primaryKey = config.length >= 1 ? config[0] : primaryKey;
+        tableName = config.length > 1 ? config[1] : tableName;
+        where();
+    }
+    
+    public Models(HashMap<String,Object> data,String... config){
+        primaryKey = config.length >= 1 ? config[0] : primaryKey;
+        tableName = config.length > 1 ? config[1] : tableName;
+        this.data = data ;
     }
 
-    public void insert(HashMap<String,Object> insertField){
-        String sql = "INSERT INTO "+tableName;
+    private void find(){
+        this.result = db.excuteQuery("SELECT * from " + tableName + " where " + SQL.where(primaryKey, "=", id) ).get();
+        this.data = this.result.isEmpty() ? null : this.result.get(0);
+    }
+
+    public void insert(){
+        String sql = SQL.insert(tableName);
         columns = "";
         values = "";
         
-        insertField.forEach((column,value)->{
+        data.forEach((column,value)->{
             columns+=column + ",";
             if(value instanceof String)
                 values+= "'" + value + "'"+ ",";
@@ -39,52 +67,85 @@ public class Models {
         db.execute(sql);
     }
 
-    public HashMap<String,Object> findWhere(String id,String... where){
-        String sql = "SELECT * from " + tableName + " where " + primaryKey + " = '" + id +"' and ";
-
-        for(int i=0;i<where.length;i++){
-            sql = sql +where[i] +" and ";
-        }
-        sql = sql.substring(0, sql.length()-5);
-
-        return db.excuteQuery(sql).get().size()==0?null:db.excuteQuery(sql).get().get(0);
-    }
-
-    public ArrayList<HashMap<String,Object>> where(String... where){
+    private void where(){
         String sql = "SELECT * from " + tableName +" where ";
 
-        for(int i=0;i<where.length;i++){
-            sql = sql +where[i] +" and ";
+        for (String w : where) {
+            sql = sql + w + " and ";
         }
         sql = sql.substring(0, sql.length()-5);
 
-        return db.excuteQuery(sql).get();
+        this.result = db.excuteQuery(sql).get();
     }
 
-    public ArrayList<HashMap<String,Object>> all(){
-        return db.excuteQuery("SELECT * from " + tableName).get();
+    public Models all(){
+        this.result = db.excuteQuery("SELECT * from " + tableName).get();
+        return this;
     }
 
-    public void deleteWhere(String... where){
-        String sql = "DELETE FROM "+tableName+" where ";
-
-        for(int i=0;i<where.length;i++){
-            sql = sql +where[i] +" and ";
-        }
-        sql = sql.substring(0, sql.length()-5);
-
+    public void delete(){
+        String sql = SQL.delete(tableName)+" where " + SQL.where(primaryKey, "=", get(primaryKey));
         db.execute(sql);
     }
 
-    public void updateWhere(String set,String... where){
-        String sql = "UPDATE "+tableName+" set "+set+" where ";
-
-        for(int i=0;i<where.length;i++){
-            sql = sql +where[i] +" and ";
-        }
-        sql = sql.substring(0, sql.length()-5);
-
+    public void update(){
+        set = "";
+        
+        this.data.forEach((column , value)->{
+            if(!column.equals(primaryKey))
+            set += SQL.set(column , value) + ",";
+        });
+        
+        set = set.substring(0, set.length()-1);
+        
+        String sql = SQL.update(tableName)+" set "+set+" where " + SQL.where(primaryKey, "=", get(primaryKey));
+        
         db.execute(sql);
     }
 
+    @SuppressWarnings("unchecked")
+    public <T> ArrayList<T> getModels(){
+        ArrayList<T> modelsArr = new ArrayList<>();
+        
+        result.stream().map((rs) -> {
+            Models model = clone();
+            model.set(rs);
+            return model;
+        }).forEach((model) -> {
+            modelsArr.add((T) model);
+        });
+        
+        return modelsArr;
+    }
+
+    public Object get(String column){
+        return data.get(column);
+    }
+
+    public HashMap<String,Object> get(){
+        return data;
+    }
+
+    public Models set(String column , Object value){
+        data.replace(column, value);
+        return this;
+    }
+    
+    public void set(HashMap<String,Object> data){
+        this.data = data;
+    }
+    
+    @Override
+    public String toString(){
+        return data.toString();
+    }
+    
+    @Override
+    public Models clone(){
+        try {
+            return (Models) super.clone();
+        } catch (CloneNotSupportedException ex) {
+            return null;
+        }
+    }
 }

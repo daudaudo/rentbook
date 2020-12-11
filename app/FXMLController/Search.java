@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import app.Models.Books;
 import app.Models.Cart;
+import app.Models.Categories;
 import app.Models.Heart;
 import core.Facades.FormManager;
 import core.Facades.Request;
@@ -14,29 +15,16 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class Home {
-
-    @FXML
-    public void initialize(){
-        renderTitle();
-        renderChoiceBox();
-        renderTableBook();
-    }
-
-    @FXML
-    private TextField qSearch;
+public class Search {
 
     @FXML
     private TableView<app.Models.Books> tableBook;
@@ -45,41 +33,34 @@ public class Home {
     private Text userText;
 
     @FXML
-    private ChoiceBox<app.Models.Categories> qChoice;
+    private Text searchText;
 
     @FXML
-    void search(MouseEvent event) {
-        if(Request.belong().input("search")==null)
-            Request.belong().input.put("search", qSearch.getText());
-        else {
-            Request.belong().input.remove("search");
-            Request.belong().input.put("search", qSearch.getText());
-        }
-        
-        Router.belong().route("search");
+    private Text searchRsText;
+
+    @FXML
+    public void initialize(){
+        renderTitle();
+        renderTableBook();
     }
 
-    public void renderTitle(){
+    private void renderTitle(){
         userText.setText(Request.belong().session().get("user"));
+
+        if(Request.belong().getRouterName().equals("category")) {
+            searchText.setText("Kết quả tìm kiếm cho : "+new Categories(Request.belong().input("category")).get("name"));
+        }
+        else{
+            searchText.setText("Kết quả tìm kiếm cho : "+Request.belong().input("search"));
+        }
     }
 
-    public void renderChoiceBox(){
-        qChoice.getItems().addAll(new app.Models.Categories("").all().getModels());
-
-        qChoice.getSelectionModel().select(0);
-
-        qChoice.getSelectionModel().selectedItemProperty().addListener((observable, oldCategory, newCategory) -> {
-            
-            if(Request.belong().input("category")!=null) Request.belong().input.remove("category");
-
-            Request.belong().input.put("category", String.valueOf(newCategory.get("id")));
-
-            Router.belong().route("category");
-        });
+    private void renderSearchRs(int number){
+        searchRsText.setText("Có "+ number+" kết quả tìm kiếm");
     }
 
     @SuppressWarnings("unchecked")
-    public void renderTableBook() {
+    private void renderTableBook() {
         TableColumn<app.Models.Books, String> nameColumn = new TableColumn<>("Name");
         TableColumn<app.Models.Books, String> authorsColumn = new TableColumn<>("Authors");
         TableColumn<app.Models.Books, ImageView> imageColumn = new TableColumn<>("Image");
@@ -103,9 +84,21 @@ public class Home {
         });
 
         tableBook.getColumns().addAll(nameColumn, authorsColumn,imageColumn,priceColumn);
+        ArrayList<Books> books;
+        if(Request.belong().getRouterName().equals("category")) {
+            books = new Books(new String[]{
+                SQL.where("category_id", "=", Request.belong().input("category"))
+            }).getModels();
+        }
+        else{
+            books = new Books("").all().getModels();
+            
+            books.removeIf((book)->{
+                return String.valueOf(book.get("name")).indexOf(Request.belong().input("search")) == -1;
+            });
+        }
 
-        ArrayList<Books> books = new Books("").all().getModels();
-
+        renderSearchRs(books.size());
         tableBook.getItems().addAll(books);
 
         TableColumn<app.Models.Books, Boolean> buttonColumn = new TableColumn<>("Button");
@@ -140,6 +133,7 @@ public class Home {
                             HashMap<String,Object> newcart = new HashMap<>();
                             newcart.put("username", Request.belong().session().get("user"));
                             newcart.put("book_id", getTableView().getItems().get(getIndex()).get("id"));
+
                             ArrayList<Cart> check =  new Cart(new String[]{
                                 SQL.where("username", "=", Request.belong().session().get("user")),
                                 SQL.where("book_id","=",getTableView().getItems().get(getIndex()).get("id"))
@@ -158,6 +152,7 @@ public class Home {
                             HashMap<String,Object> newheart = new HashMap<>();
                             newheart.put("username", Request.belong().session().get("user"));
                             newheart.put("book_id", getTableView().getItems().get(getIndex()).get("id"));
+                            
                             ArrayList<Heart> check =  new Heart(new String[]{
                                 SQL.where("username", "=", Request.belong().session().get("user")),
                                 SQL.where("book_id","=",getTableView().getItems().get(getIndex()).get("id"))
@@ -183,5 +178,4 @@ public class Home {
 
         tableBook.getColumns().add(buttonColumn);
     }
-
 }

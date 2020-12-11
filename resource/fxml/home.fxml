@@ -17,13 +17,13 @@
          </font>
       </TextField>
       <FontAwesomeIcon id="btnSearch" fill="#566573" iconName="SEARCH" layoutX="814.0" layoutY="68.0" onMouseClicked="#search" size="2EM" />
-      <TableView id="table" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="50.0" layoutY="93.0" prefHeight="470.0" prefWidth="800.0" scaleShape="false" styleClass="textbox" />
-      <Text id="usernameText" fill="WHITE" layoutX="788.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
+      <TableView id="table" fx:id="tableBook" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="50.0" layoutY="93.0" prefHeight="470.0" prefWidth="800.0" scaleShape="false" styleClass="textbox" />
+      <Text id="usernameText" fx:id="userText" fill="WHITE" layoutX="788.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <ChoiceBox id="qChoice" layoutX="50.0" layoutY="40.0" prefHeight="40.0" prefWidth="150.0" styleClass="textbox">
+      <ChoiceBox id="qChoice" fx:id="qChoice" layoutX="50.0" layoutY="40.0" prefHeight="40.0" prefWidth="150.0" styleClass="textbox">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ChoiceBox>

@@ -5,20 +5,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="background-base" stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="background-base" stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.FXMLController.Search">
    <children>
-      <TableView id="table" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="50.0" layoutY="156.0" prefHeight="407.0" prefWidth="800.0" scaleShape="false" styleClass="textbox" />
-      <Text id="usernameText" fill="WHITE" layoutX="788.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
+      <TableView id="table" fx:id="tableBook" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="50.0" layoutY="156.0" prefHeight="407.0" prefWidth="800.0" scaleShape="false" styleClass="textbox" />
+      <Text id="usernameText" fx:id="userText" fill="WHITE" layoutX="788.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <Text id="searchTitle" fill="WHITE" layoutX="50.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
+      <Text id="searchTitle" fx:id="searchText" fill="WHITE" layoutX="50.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Text>
-      <Text id="searchRs" fill="WHITE" layoutX="50.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
+      <Text id="searchRs" fx:id="searchRsText" fill="WHITE" layoutX="50.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
